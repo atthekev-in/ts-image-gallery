@@ -1,7 +1,6 @@
-import { read } from 'fs';
 import pool from '../dbconfig/dbconnector'
 
-class UserController {
+class AdminController {
     
     public async create(req, res) {
         try {
@@ -10,7 +9,7 @@ class UserController {
             const sql = "INSERT into users (username, password) VALUES ($1, $2)";
             client.query(sql, [username, password]);
             client.release();
-            res.status(200).send({result: "redirect", url: "/users"});
+            res.status(200).send({result: "redirect", url: "/admin/users"});
         } catch (error) {
             res.status(400).send(error);
             
@@ -26,7 +25,7 @@ class UserController {
             }
             client.query(query);
             client.release();
-            res.status(200).send({result: 'redirect', url: "/users"});
+            res.status(200).send({result: 'redirect', url: "/admin/users"});
         } catch (error) {
             res.status(400).send(error);
         }
@@ -39,7 +38,7 @@ class UserController {
             client.query(sql, [req.params.id]);
             client.release();
       
-            res.status(200).send({ result: 'redirect', url: "/users"})
+            res.status(200).send({ result: 'redirect', url: "/admin/users"})
         } catch (error) {
             res.status(404).send(error);
         }
@@ -73,4 +72,4 @@ class UserController {
     }
     
 }
-export default UserController;
+export default AdminController;

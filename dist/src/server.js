@@ -26,7 +26,9 @@ const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const UserRouter_1 = __importDefault(require("./routers/UserRouter"));
+const AdminRouter_1 = __importDefault(require("./routers/AdminRouter"));
+const LoginRouter_1 = __importDefault(require("./routers/LoginRouter"));
+const ImageRouter_1 = __importDefault(require("./routers/ImageRouter"));
 const dbconnector_1 = __importDefault(require("./dbconfig/dbconnector"));
 class Server {
     constructor() {
@@ -57,7 +59,9 @@ class Server {
         });
     }
     routerConfig() {
-        this.app.use('/users', UserRouter_1.default);
+        this.app.use('/admin/users', AdminRouter_1.default);
+        this.app.use('/', LoginRouter_1.default);
+        this.app.use('/upload', ImageRouter_1.default);
     }
 }
 exports.default = Server;

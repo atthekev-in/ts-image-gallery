@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dbconnector_1 = __importDefault(require("../dbconfig/dbconnector"));
-class UserController {
+class AdminController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -22,7 +22,7 @@ class UserController {
                 const sql = "INSERT into users (username, password) VALUES ($1, $2)";
                 client.query(sql, [username, password]);
                 client.release();
-                res.status(200).send({ result: "redirect", url: "/users" });
+                res.status(200).send({ result: "redirect", url: "/admin/users" });
             }
             catch (error) {
                 res.status(400).send(error);
@@ -40,7 +40,7 @@ class UserController {
                 };
                 client.query(query);
                 client.release();
-                res.status(200).send({ result: 'redirect', url: "/users" });
+                res.status(200).send({ result: 'redirect', url: "/admin/users" });
             }
             catch (error) {
                 res.status(400).send(error);
@@ -54,7 +54,7 @@ class UserController {
                 const sql = "DELETE from users WHERE username = $1";
                 client.query(sql, [req.params.id]);
                 client.release();
-                res.status(200).send({ result: 'redirect', url: "/users" });
+                res.status(200).send({ result: 'redirect', url: "/admin/users" });
             }
             catch (error) {
                 res.status(404).send(error);
@@ -92,5 +92,5 @@ class UserController {
         });
     }
 }
-exports.default = UserController;
-//# sourceMappingURL=UserController.js.map
+exports.default = AdminController;
+//# sourceMappingURL=AdminController.js.map

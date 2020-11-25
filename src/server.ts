@@ -2,9 +2,10 @@ import express, { Application, Router } from 'express';
 import * as dotenv from 'dotenv';
 import path from 'path';
 import bodyParser from 'body-parser';
-import userRouter from './routers/UserRouter';
+import adminRouter from './routers/AdminRouter';
+import loginRouter from './routers/LoginRouter'
+import imageRouter from './routers/ImageRouter'
 import pool from './dbconfig/dbconnector';
-import UserController from './controllers/UserController';
 
 class Server {
     private app;
@@ -33,8 +34,9 @@ class Server {
     }
 
     private routerConfig() {
-        this.app.use('/users', userRouter);
-  
+        this.app.use('/admin/users', adminRouter);
+        this.app.use('/', loginRouter);
+        this.app.use('/upload', imageRouter)
     }
 
     public start = (port: number) => {
